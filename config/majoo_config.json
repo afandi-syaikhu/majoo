@@ -5,5 +5,9 @@
         "name": "majoo",
         "user": "admin",
         "password": "admin1234"
+    },
+    "jwt": {
+        "secret_key": "my_secret_key",
+        "exp_time": 30
     }
 }
