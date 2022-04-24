@@ -40,8 +40,8 @@ func (_m *Merchant) GetReportByMerchantID(ctx context.Context, id int64, paginat
 
 	response.Success = true
 	response.Data = &model.MerchantTransactionReport{
-		ID:           merchant.ID,
-		Name:         merchant.Name,
+		MerchantID:   merchant.ID,
+		MerchantName: merchant.MerchantName,
 		Transactions: transactions,
 	}
 

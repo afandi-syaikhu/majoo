@@ -11,22 +11,22 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type MerchantHandler struct {
-	AuthUseCase     usecase.AuthUseCase
-	MerchantUseCase usecase.MerchantUseCase
+type OutletHandler struct {
+	AuthUseCase   usecase.AuthUseCase
+	OutletUseCase usecase.OutletUseCase
 }
 
-func NewMerchantHandler(e *echo.Echo, authUC usecase.AuthUseCase, merchantUC usecase.MerchantUseCase) {
-	handler := &MerchantHandler{
-		AuthUseCase:     authUC,
-		MerchantUseCase: merchantUC,
+func NewOutletHandler(e *echo.Echo, authUC usecase.AuthUseCase, outletUC usecase.OutletUseCase) {
+	handler := &OutletHandler{
+		AuthUseCase:   authUC,
+		OutletUseCase: outletUC,
 	}
 
 	// register route
-	e.GET("/v1/merchants/:id/report", handler.GetReportByMerchantID)
+	e.GET("/v1/outlets/:id/report", handler.GetReportByOutletID)
 }
 
-func (_m *MerchantHandler) GetReportByMerchantID(c echo.Context) error {
+func (_o *OutletHandler) GetReportByOutletID(c echo.Context) error {
 	response := model.Response{}
 	ctx := c.Request().Context()
 	pathID := c.Param("id")
@@ -55,7 +55,7 @@ func (_m *MerchantHandler) GetReportByMerchantID(c echo.Context) error {
 		return echo.ErrUnauthorized
 	}
 
-	tokenData, err := _m.AuthUseCase.ValidateToken(ctx, reqHeaderAuth)
+	tokenData, err := _o.AuthUseCase.ValidateToken(ctx, reqHeaderAuth)
 	if err != nil {
 		response.Message = err.Error()
 		c.JSON(http.StatusUnauthorized, response)
@@ -70,7 +70,7 @@ func (_m *MerchantHandler) GetReportByMerchantID(c echo.Context) error {
 		return echo.ErrUnauthorized
 	}
 
-	isValid, err := _m.MerchantUseCase.IsValidMerchantForUser(ctx, int64(id), tokenData.Username)
+	isValid, err := _o.OutletUseCase.IsValidOutletForUser(ctx, int64(id), tokenData.Username)
 	if err != nil {
 		response.Message = constant.InternalServerError
 		c.JSON(http.StatusInternalServerError, response)
@@ -116,7 +116,7 @@ func (_m *MerchantHandler) GetReportByMerchantID(c echo.Context) error {
 		Page:  page,
 	}
 
-	res, err := _m.MerchantUseCase.GetReportByMerchantID(ctx, int64(id), pagination)
+	res, err := _o.OutletUseCase.GetReportByOutletID(ctx, int64(id), pagination)
 	if err != nil {
 		response.Message = constant.InternalServerError
 		c.JSON(http.StatusInternalServerError, response)

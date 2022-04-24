@@ -99,7 +99,7 @@ func (_m *Merchant) FindByIDAndUsername(ctx context.Context, id int64, username 
 	var merchant *model.Merchant
 	for rows.Next() {
 		merchant = &model.Merchant{}
-		err = rows.Scan(&merchant.ID, &merchant.UserID, &merchant.Name, &merchant.CreatedAt, &merchant.CreatedBy, &merchant.UpdatedAt, &merchant.UpdatedBy)
+		err = rows.Scan(&merchant.ID, &merchant.UserID, &merchant.MerchantName, &merchant.CreatedAt, &merchant.CreatedBy, &merchant.UpdatedAt, &merchant.UpdatedBy)
 		if err != nil {
 			return nil, err
 		}
@@ -126,7 +126,7 @@ func (_m *Merchant) FindByID(ctx context.Context, id int64) (*model.Merchant, er
 	var merchant *model.Merchant
 	for rows.Next() {
 		merchant = &model.Merchant{}
-		err = rows.Scan(&merchant.ID, &merchant.UserID, &merchant.Name, &merchant.CreatedAt, &merchant.CreatedBy, &merchant.UpdatedAt, &merchant.UpdatedBy)
+		err = rows.Scan(&merchant.ID, &merchant.UserID, &merchant.MerchantName, &merchant.CreatedAt, &merchant.CreatedBy, &merchant.UpdatedAt, &merchant.UpdatedBy)
 		if err != nil {
 			return nil, err
 		}
