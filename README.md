@@ -24,3 +24,8 @@ On the root directory, run this command:
         make migration-up
     4. Run this project
         make run
+
+### Testing API
+
+1. Install Postman: https://learning.postman.com/docs/getting-started/installation-and-updates/
+2. Import [this](https://github.com/afandi-syaikhu/majoo/blob/45c67dfb25fe6c335d29108efcd428bcd746932e/Majoo.postman_collection.json) Postman collection
