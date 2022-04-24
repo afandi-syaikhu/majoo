@@ -1,6 +1,6 @@
 build:
 	@echo " >> building majoo-service binary"
-	@go build -v -o majoo-service app/*.go
+	@go build -v -o majoo-service main.go
 
 run: build
 	@./majoo-service

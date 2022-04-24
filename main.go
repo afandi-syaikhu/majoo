@@ -5,6 +5,10 @@ import (
 	"fmt"
 
 	"github.com/afandi-syaikhu/majoo/config"
+	"github.com/afandi-syaikhu/majoo/delivery/rest"
+	"github.com/afandi-syaikhu/majoo/repository"
+	"github.com/afandi-syaikhu/majoo/usecase"
+	"github.com/labstack/echo/v4"
 	_ "github.com/lib/pq"
 	log "github.com/sirupsen/logrus"
 )
@@ -27,4 +31,17 @@ func main() {
 
 	defer db.Close()
 
+	// init repo
+	userRepo := repository.NewUserRepository(db)
+
+	// init usecase
+	authUC := usecase.NewAuthUseCase(userRepo, cfg)
+
+	// init echo framework
+	e := echo.New()
+
+	// init handler
+	rest.NewAuthHandler(e, authUC)
+
+	e.Logger.Fatal(e.Start(":8080"))
 }
