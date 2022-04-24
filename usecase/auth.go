@@ -68,14 +68,14 @@ func (_a *Auth) ValidateToken(ctx context.Context, headerAuth string) (*model.To
 	mySigningKey := []byte(_a.Config.Jwt.SecretKey)
 	token, err := jwt.Parse(tokens[1], func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, errInternalServer
+			return nil, errExpiredToken
 		}
 
 		return mySigningKey, nil
 	})
 
 	if err != nil {
-		return nil, errUnauthorized
+		return nil, err
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)

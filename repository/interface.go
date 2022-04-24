@@ -17,3 +17,10 @@ type MerchantRepository interface {
 	FindByIDAndUsername(ctx context.Context, id int64, username string) (*model.Merchant, error)
 	FindByID(ctx context.Context, id int64) (*model.Merchant, error)
 }
+
+//go:generate mockgen -destination=mock/outlet_mock.go -package=mock github.com/afandi-syaikhu/majoo/repository OutletRepository
+type OutletRepository interface {
+	GetReportByOutletID(ctx context.Context, id int64, pagination model.Pagination) (*[]model.TransactionReport, error)
+	FindByIDAndUsername(ctx context.Context, id int64, username string) (*model.Outlet, error)
+	FindByID(ctx context.Context, id int64) (*model.Outlet, error)
+}
