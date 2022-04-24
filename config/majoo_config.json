@@ -1,0 +1,9 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 5400,
+        "name": "majoo",
+        "user": "admin",
+        "password": "admin1234"
+    }
+}
