@@ -3,6 +3,7 @@ package rest
 import (
 	"net/http"
 
+	"github.com/afandi-syaikhu/majoo/constant"
 	"github.com/afandi-syaikhu/majoo/model"
 	"github.com/afandi-syaikhu/majoo/usecase"
 	"github.com/labstack/echo/v4"
@@ -26,7 +27,7 @@ func (_a *AuthHandler) Login(c echo.Context) error {
 	ctx := c.Request().Context()
 	body := model.Auth{}
 	if err := c.Bind(&body); err != nil {
-		response.Message = "invalid data"
+		response.Message = constant.BadRequest
 		c.JSON(http.StatusBadRequest, response)
 
 		return echo.ErrBadRequest
@@ -34,7 +35,7 @@ func (_a *AuthHandler) Login(c echo.Context) error {
 
 	res, err := _a.AuthUseCase.Login(ctx, body)
 	if err != nil {
-		response.Message = "internal error"
+		response.Message = constant.InternalServerError
 		c.JSON(http.StatusInternalServerError, response)
 
 		return echo.ErrInternalServerError

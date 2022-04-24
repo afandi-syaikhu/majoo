@@ -8,6 +8,10 @@
     },
     "jwt": {
         "secret_key": "my_secret_key",
-        "exp_time": 30
+        "exp_time": 30,
+        "content": {
+            "exp_time": "exp",
+            "username": "username"
+        }
     }
 }

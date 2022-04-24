@@ -33,15 +33,18 @@ func main() {
 
 	// init repo
 	userRepo := repository.NewUserRepository(db)
+	merchantRepo := repository.NewMerchantRepository(db)
 
 	// init usecase
 	authUC := usecase.NewAuthUseCase(userRepo, cfg)
+	merchantUC := usecase.NewMerchantUseCase(merchantRepo)
 
 	// init echo framework
 	e := echo.New()
 
 	// init handler
 	rest.NewAuthHandler(e, authUC)
+	rest.NewMerchantHandler(e, authUC, merchantUC, cfg)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

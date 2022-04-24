@@ -1,7 +1,12 @@
 package constant
 
 const (
-	BadRequest        = "Bad request"
-	InvalidCredential = "Invalid credential"
-	NotFound          = "Couldn't find any data"
+	BadRequest          = "bad request"
+	ExpiredToken        = "your token has expired"
+	Forbidden           = "forbidden"
+	InternalServerError = "internal server error"
+	InvalidCredential   = "invalid credential"
+	InvalidToken        = "invalid token"
+	NotFound            = "couldn't find any data"
+	Unauthorized        = "unauthorized"
 )
