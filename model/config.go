@@ -14,6 +14,12 @@ type DatabaseConfig struct {
 }
 
 type JwtConfig struct {
-	SecretKey string `json:"secret_key"`
-	ExpTime   int    `json:"exp_time"`
+	SecretKey string     `json:"secret_key"`
+	ExpTime   int        `json:"exp_time"`
+	Content   JwtContent `json:"content"`
+}
+
+type JwtContent struct {
+	ExpTime  string `json:"exp_time"`
+	Username string `json:"username"`
 }
